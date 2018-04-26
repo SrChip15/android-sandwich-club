@@ -54,6 +54,6 @@ public class JsonUtils {
             Log.e(TAG, "Failed to parse JSON", je);
         }
 
-        return null;
+        return sandwich;
     }
 }
