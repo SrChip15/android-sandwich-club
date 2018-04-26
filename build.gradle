@@ -34,4 +34,5 @@ ext {
     supportLibVersion = "27.1.1"
     picasso= "2.5.2"
     constraintLayout = "1.1.0"
+    butterKnife = "8.8.1"
 }
