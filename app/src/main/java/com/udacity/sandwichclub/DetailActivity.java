@@ -5,9 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
@@ -23,11 +25,18 @@ public class DetailActivity extends AppCompatActivity {
     private static final String TAG = DetailActivity.class.getSimpleName();
 
     /* Class variables */
-    @BindView(R.id.name_text_view) TextView nameTextView;
-    @BindView(R.id.aka_text_view) TextView akaTextView;
-    @BindView(R.id.origin_place_text_view) TextView originTextView;
-    @BindView(R.id.desc_text_view) TextView descTextView;
-    @BindView(R.id.ingredients_text_view) TextView ingredientsTextView;
+    @BindView(R.id.sandwich_image_view)
+    ImageView sandwichImageView;
+    @BindView(R.id.name_text_view)
+    TextView nameTextView;
+    @BindView(R.id.aka_text_view)
+    TextView akaTextView;
+    @BindView(R.id.origin_place_text_view)
+    TextView originTextView;
+    @BindView(R.id.desc_text_view)
+    TextView descTextView;
+    @BindView(R.id.ingredients_text_view)
+    TextView ingredientsTextView;
     private Sandwich sandwich;
 
     @Override
@@ -44,7 +53,7 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         @SuppressWarnings("ConstantConditions") // Intent is already checked for null
-        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+                int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
             closeOnError();
@@ -61,9 +70,9 @@ public class DetailActivity extends AppCompatActivity {
         }
 
         populateUI();
-        /*Picasso.with(this)
+        Picasso.with(this)
                 .load(sandwich.getImage())
-                .into(ingredientsIv);*/
+                .into(sandwichImageView);
 
         setTitle(sandwich.getMainName());
     }
@@ -83,7 +92,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private String parseString(List<String> listOfWords) {
         String listOfOtherNames = null;
-        if (listOfWords.size() >0) {
+        if (listOfWords.size() > 0) {
             listOfOtherNames = TextUtils.join(", ", listOfWords);
             Log.i(TAG, "List String: " + listOfOtherNames);
         }
