@@ -22,6 +22,7 @@
         <activity
             android:name=".ui.DetailActivity"
             android:launchMode="singleTop" />
+        <activity android:name=".ui.SandwichPagerActivity" />
     </application>
 
 </manifest>

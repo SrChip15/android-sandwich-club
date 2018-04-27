@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchDetailActivity(int position) {
-        Intent intent = DetailActivity.newIntent(this, position);
+        Intent intent = SandwichPagerActivity.newIntent(this, position);
         startActivity(intent);
     }
 }

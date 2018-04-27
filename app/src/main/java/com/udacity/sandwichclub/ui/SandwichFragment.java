@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -80,11 +79,11 @@ public class SandwichFragment extends Fragment {
                     @Override
                     public void onError() {
                         imageLoadBar.setVisibility(View.GONE);
-                        Toast.makeText(
+                        /*Toast.makeText(
                                 getActivity(),
                                 R.string.detail_image_error_message,
                                 Toast.LENGTH_SHORT
-                        ).show();
+                        ).show();*/
                     }
                 });
 
