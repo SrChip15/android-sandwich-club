@@ -33,8 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void launchDetailActivity(int position) {
-        Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_POSITION, position);
+        Intent intent = DetailActivity.newIntent(this, position);
         startActivity(intent);
     }
 }
