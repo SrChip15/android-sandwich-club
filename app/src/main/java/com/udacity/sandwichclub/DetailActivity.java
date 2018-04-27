@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
@@ -27,6 +30,8 @@ public class DetailActivity extends AppCompatActivity {
     /* Class variables */
     @BindView(R.id.sandwich_image_view)
     ImageView sandwichImageView;
+    @BindView(R.id.progressBar)
+    ProgressBar imageLoadBar;
     @BindView(R.id.name_text_view)
     TextView nameTextView;
     @BindView(R.id.aka_text_view)
@@ -72,7 +77,23 @@ public class DetailActivity extends AppCompatActivity {
         populateUI();
         Picasso.with(this)
                 .load(sandwich.getImage())
-                .into(sandwichImageView);
+                .error(R.drawable.ic_error)
+                .into(sandwichImageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        imageLoadBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        imageLoadBar.setVisibility(View.GONE);
+                        Toast.makeText(
+                                DetailActivity.this,
+                                R.string.detail_image_error_message,
+                                Toast.LENGTH_SHORT
+                        ).show();
+                    }
+                });
 
         setTitle(sandwich.getMainName());
     }
