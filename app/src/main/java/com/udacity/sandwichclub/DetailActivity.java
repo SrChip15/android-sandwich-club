@@ -3,6 +3,8 @@ package com.udacity.sandwichclub;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ public class DetailActivity extends AppCompatActivity {
     /* Class Constants */
     public static final String EXTRA_POSITION = "extra_position";
     private static final int DEFAULT_POSITION = -1;
+    private static final String TAG = DetailActivity.class.getSimpleName();
 
     /* Class variables */
     @BindView(R.id.name_text_view) TextView nameTextView;
@@ -40,6 +43,7 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
         }
 
+        @SuppressWarnings("ConstantConditions") // Intent is already checked for null
         int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
@@ -71,24 +75,18 @@ public class DetailActivity extends AppCompatActivity {
 
     private void populateUI() {
         nameTextView.setText(sandwich.getMainName());
+        akaTextView.setText(parseString(sandwich.getAlsoKnownAs()));
         originTextView.setText(sandwich.getPlaceOfOrigin());
         descTextView.setText(sandwich.getDescription());
-
-        for (int i = 0; i < sandwich.getAlsoKnownAs().size(); i++) {
-            akaTextView.append(
-                    isLastItem(sandwich.getAlsoKnownAs(), i) ? sandwich.getAlsoKnownAs().get(i) : sandwich.getAlsoKnownAs().get(i) + ", "
-            );
-        }
-
-        for (int i = 0; i < sandwich.getIngredients().size(); i++) {
-            ingredientsTextView.append(
-                    isLastItem(sandwich.getIngredients(), i) ? sandwich.getIngredients().get(i) : sandwich.getIngredients().get(i) + ", "
-            );
-
-        }
+        ingredientsTextView.setText(parseString(sandwich.getIngredients()));
     }
 
-    private boolean isLastItem(List<String> words, int currentIndex) {
-        return words.size() - 1 == currentIndex;
+    private String parseString(List<String> listOfWords) {
+        String listOfOtherNames = null;
+        if (listOfWords.size() >0) {
+            listOfOtherNames = TextUtils.join(", ", listOfWords);
+            Log.i(TAG, "List String: " + listOfOtherNames);
+        }
+        return listOfOtherNames;
     }
 }
