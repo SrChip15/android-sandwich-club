@@ -2,6 +2,7 @@
     <string name="app_name">Sandwich Club</string>
 
     <!-- Detail Activity-->
+    <string name="detail_name_label">Name:</string>
     <string name="detail_also_known_as_label">Also known as:</string>
     <string name="detail_place_of_origin_label">Place of origin:</string>
     <string name="detail_description_label">Description:</string>
@@ -12,11 +13,6 @@
 
     <!-- Error messages-->
     <string name="detail_error_message">Sandwich data not available</string>
-    <string name="name_label">Name</string>
-    <string name="aka_label">Also known as</string>
-    <string name="place_of_origin_label">Place of Origin</string>
-    <string name="desc_label">Description</string>
-    <string name="ingredients_label">Ingredients</string>
 
     <string-array name="sandwich_names">
         <item>Ham and cheese sandwich</item>
