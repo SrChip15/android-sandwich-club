@@ -69,6 +69,8 @@ public class SandwichFragment extends Fragment {
         Picasso.with(getActivity())
                 .load(sandwich.getImage())
                 .error(R.drawable.ic_error)
+                .fit()
+                .centerCrop()
                 .into(sandwichImageView, new Callback() {
                     @Override
                     public void onSuccess() {
@@ -85,10 +87,10 @@ public class SandwichFragment extends Fragment {
     }
 
     private void populateUI() {
-        nameTextView.setText(sandwich.getMainName());
+        nameTextView.setText(parseString(sandwich.getMainName()));
         akaTextView.setText(parseString(sandwich.getAlsoKnownAs()));
-        originTextView.setText(sandwich.getPlaceOfOrigin());
-        descTextView.setText(sandwich.getDescription());
+        originTextView.setText(parseString(sandwich.getPlaceOfOrigin()));
+        descTextView.setText(parseString(sandwich.getDescription()));
         ingredientsTextView.setText(parseString(sandwich.getIngredients()));
     }
 
@@ -101,5 +103,13 @@ public class SandwichFragment extends Fragment {
         }
 
         return listOfOtherNames;
+    }
+
+    private String parseString(String string) {
+        if (TextUtils.isEmpty(string)) {
+            return getString(R.string.detail_unavailable_error_message);
+        }
+
+        return string;
     }
 }

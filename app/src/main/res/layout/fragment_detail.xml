@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,87 +11,72 @@
 
         <ImageView
             android:id="@+id/sandwich_image_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="@dimen/sandwich_image_width"
+            android:layout_height="@dimen/sandwich_image_height"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:contentDescription="@string/sandwich_picture_content_description"
-            android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/guideline"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.35" />
-
-        <TextView
-            android:id="@+id/textView"
-            style="@style/DetailScreenLabelTextBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/detail_name_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline" />
-
-        <TextView
-            android:id="@+id/name_text_view"
-            style="@style/DetailScreenInfoTextBox"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            app:layout_constraintBottom_toBottomOf="@+id/sandwich_image_view"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView"
-            tools:text="Name of Sandwich" />
+            app:layout_constraintStart_toEndOf="@+id/sandwich_image_view"
+            app:layout_constraintTop_toTopOf="@+id/sandwich_image_view">
 
-        <TextView
-            android:id="@+id/aka_label"
-            style="@style/DetailScreenLabelTextBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/detail_also_known_as_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_text_view" />
+            <TextView
+                android:id="@+id/textView"
+                style="@style/DetailScreenLabelTextBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/detail_name_label" />
 
-        <TextView
-            android:id="@+id/aka_text_view"
-            style="@style/DetailScreenInfoTextBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/aka_label"
-            tools:text="Also known as" />
+            <TextView
+                android:id="@+id/name_text_view"
+                style="@style/DetailScreenInfoTextBox.AdjacentToImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Name of Sandwich" />
 
-        <TextView
-            android:id="@+id/textView5"
-            style="@style/DetailScreenLabelTextBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="@string/detail_place_of_origin_label"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/aka_text_view" />
+            <TextView
+                android:id="@+id/aka_label"
+                style="@style/DetailScreenLabelTextBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/detail_also_known_as_label" />
 
-        <TextView
-            android:id="@+id/origin_place_text_view"
-            style="@style/DetailScreenInfoTextBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/activity_horizontal_margin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView5"
-            tools:text="San Francisco" />
+            <TextView
+                android:id="@+id/aka_text_view"
+                style="@style/DetailScreenInfoTextBox.AdjacentToImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Also known as" />
+
+            <TextView
+                android:id="@+id/textView5"
+                style="@style/DetailScreenLabelTextBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:text="@string/detail_place_of_origin_label"
+                tools:layout_editor_absoluteY="182dp" />
+
+            <TextView
+                android:id="@+id/origin_place_text_view"
+                style="@style/DetailScreenInfoTextBox.AdjacentToImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="San Francisco" />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/textView7"
@@ -103,7 +87,7 @@
             android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="@string/detail_description_label"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/origin_place_text_view" />
+            app:layout_constraintTop_toBottomOf="@+id/sandwich_image_view" />
 
         <TextView
             android:id="@+id/desc_text_view"
@@ -143,11 +127,11 @@
             android:id="@+id/progressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="@dimen/activity_horizontal_margin"
             android:indeterminate="true"
             app:layout_constraintBottom_toBottomOf="@+id/sandwich_image_view"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/sandwich_image_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/sandwich_image_view" />
     </android.support.constraint.ConstraintLayout>
