@@ -14,6 +14,7 @@
     <!-- Error messages-->
     <string name="detail_error_message">Sandwich data not available</string>
     <string name="detail_image_error_message">Image unavailable!</string>
+    <string name="detail_unavailable_error_message">Information Unavailable</string>
 
     <string-array name="sandwich_names">
         <item>Ham and cheese sandwich</item>
