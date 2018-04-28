@@ -1,10 +1,9 @@
-package com.udacity.sandwichclub;
+package com.udacity.sandwichclub.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -13,6 +12,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.model.Sandwich;
 import com.udacity.sandwichclub.utils.JsonUtils;
 
@@ -57,8 +57,9 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
         }
 
-        @SuppressWarnings("ConstantConditions") // Intent is already checked for null
-                int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+        // Intent is already checked for null, so suppress null pointer exception warning
+        @SuppressWarnings("ConstantConditions")
+        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
         if (position == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
             closeOnError();
@@ -106,17 +107,21 @@ public class DetailActivity extends AppCompatActivity {
     private void populateUI() {
         nameTextView.setText(sandwich.getMainName());
         akaTextView.setText(parseString(sandwich.getAlsoKnownAs()));
-        originTextView.setText(sandwich.getPlaceOfOrigin());
         descTextView.setText(sandwich.getDescription());
         ingredientsTextView.setText(parseString(sandwich.getIngredients()));
+
+        String placeOfOrigin = sandwich.getPlaceOfOrigin();
+        originTextView.setText(TextUtils.isEmpty(placeOfOrigin)? getString(R.string.detail_unavailable_error_message) : placeOfOrigin);
     }
 
     private String parseString(List<String> listOfWords) {
         String listOfOtherNames = null;
         if (listOfWords.size() > 0) {
             listOfOtherNames = TextUtils.join(", ", listOfWords);
-            Log.i(TAG, "List String: " + listOfOtherNames);
+        } else {
+            return getString(R.string.detail_unavailable_error_message);
         }
+
         return listOfOtherNames;
     }
 }

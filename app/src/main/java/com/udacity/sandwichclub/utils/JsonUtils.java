@@ -49,7 +49,6 @@ public class JsonUtils {
             }
 
             sandwich = new Sandwich(mainName, alsoKnownAs, placeOfOrigin, description, image, ingredients);
-            Log.i(TAG, sandwich.toString());
         } catch (JSONException je) {
             Log.e(TAG, "Failed to parse JSON", je);
         }
