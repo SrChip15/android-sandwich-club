@@ -23,5 +23,6 @@ dependencies {
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.squareup.picasso:picasso:${rootProject.ext.picasso}"
     implementation "com.jakewharton:butterknife:${rootProject.ext.butterKnife}"
+    implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.okHttp}"
     annotationProcessor "com.jakewharton:butterknife-compiler:${rootProject.ext.butterKnife}"
 }

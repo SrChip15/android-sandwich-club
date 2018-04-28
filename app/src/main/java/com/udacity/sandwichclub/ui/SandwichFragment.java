@@ -1,31 +1,31 @@
 package com.udacity.sandwichclub.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.model.Sandwich;
-import com.udacity.sandwichclub.utils.JsonUtils;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class DetailActivity extends AppCompatActivity {
+public class SandwichFragment extends Fragment {
     /* Class Constants */
-    public static final String EXTRA_POSITION = "extra_position";
-    private static final int DEFAULT_POSITION = -1;
-    private static final String TAG = DetailActivity.class.getSimpleName();
+    private static final String ARG_SANDWICH = "sandwich";
+    private static final String TAG = SandwichFragment.class.getSimpleName();
 
     /* Class variables */
     @BindView(R.id.sandwich_image_view)
@@ -44,39 +44,29 @@ public class DetailActivity extends AppCompatActivity {
     TextView ingredientsTextView;
     private Sandwich sandwich;
 
+    public static SandwichFragment newInstance(Sandwich sandwich) {
+        Bundle args = new Bundle();
+        args.putParcelable(ARG_SANDWICH, sandwich);
+
+        SandwichFragment fragment = new SandwichFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
-        ButterKnife.bind(this);
+        sandwich = getArguments().getParcelable(ARG_SANDWICH);
+    }
 
-        //ImageView ingredientsIv = findViewById(R.id.image_iv);
-
-        Intent intent = getIntent();
-        if (intent == null) {
-            closeOnError();
-        }
-
-        // Intent is already checked for null, so suppress null pointer exception warning
-        @SuppressWarnings("ConstantConditions")
-        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
-        if (position == DEFAULT_POSITION) {
-            // EXTRA_POSITION not found in intent
-            closeOnError();
-            return;
-        }
-
-        String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
-        String json = sandwiches[position];
-        sandwich = JsonUtils.parseSandwichJson(json);
-        if (sandwich == null) {
-            // Sandwich data unavailable
-            closeOnError();
-            return;
-        }
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
+        ButterKnife.bind(this, view);
 
         populateUI();
-        Picasso.with(this)
+        Picasso.with(getActivity())
                 .load(sandwich.getImage())
                 .error(R.drawable.ic_error)
                 .into(sandwichImageView, new Callback() {
@@ -88,30 +78,18 @@ public class DetailActivity extends AppCompatActivity {
                     @Override
                     public void onError() {
                         imageLoadBar.setVisibility(View.GONE);
-                        Toast.makeText(
-                                DetailActivity.this,
-                                R.string.detail_image_error_message,
-                                Toast.LENGTH_SHORT
-                        ).show();
                     }
                 });
 
-        setTitle(sandwich.getMainName());
-    }
-
-    private void closeOnError() {
-        finish();
-        Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
+        return view;
     }
 
     private void populateUI() {
         nameTextView.setText(sandwich.getMainName());
         akaTextView.setText(parseString(sandwich.getAlsoKnownAs()));
+        originTextView.setText(sandwich.getPlaceOfOrigin());
         descTextView.setText(sandwich.getDescription());
         ingredientsTextView.setText(parseString(sandwich.getIngredients()));
-
-        String placeOfOrigin = sandwich.getPlaceOfOrigin();
-        originTextView.setText(TextUtils.isEmpty(placeOfOrigin)? getString(R.string.detail_unavailable_error_message) : placeOfOrigin);
     }
 
     private String parseString(List<String> listOfWords) {
