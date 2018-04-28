@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +62,8 @@ public class SandwichFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_detail, container, false);
-        ButterKnife.bind(this, v);
+        View view = inflater.inflate(R.layout.fragment_detail, container, false);
+        ButterKnife.bind(this, view);
 
         populateUI();
         Picasso.with(getActivity())
@@ -79,15 +78,10 @@ public class SandwichFragment extends Fragment {
                     @Override
                     public void onError() {
                         imageLoadBar.setVisibility(View.GONE);
-                        /*Toast.makeText(
-                                getActivity(),
-                                R.string.detail_image_error_message,
-                                Toast.LENGTH_SHORT
-                        ).show();*/
                     }
                 });
 
-        return v;
+        return view;
     }
 
     private void populateUI() {
@@ -102,7 +96,6 @@ public class SandwichFragment extends Fragment {
         String listOfOtherNames = null;
         if (listOfWords.size() > 0) {
             listOfOtherNames = TextUtils.join(", ", listOfWords);
-            Log.i(TAG, "List String: " + listOfOtherNames);
         }
         return listOfOtherNames;
     }
