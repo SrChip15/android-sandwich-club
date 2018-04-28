@@ -96,7 +96,10 @@ public class SandwichFragment extends Fragment {
         String listOfOtherNames = null;
         if (listOfWords.size() > 0) {
             listOfOtherNames = TextUtils.join(", ", listOfWords);
+        } else {
+            return getString(R.string.detail_unavailable_error_message);
         }
+
         return listOfOtherNames;
     }
 }

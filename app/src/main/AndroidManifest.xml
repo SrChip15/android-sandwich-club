@@ -20,9 +20,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.DetailActivity"
-            android:launchMode="singleTop" />
-        <activity
             android:name=".ui.SandwichPagerActivity"
             android:parentActivityName=".ui.MainActivity" />
     </application>
