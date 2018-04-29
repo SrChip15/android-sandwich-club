@@ -32,6 +32,7 @@ public class SandwichPagerActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_POSITION, position);
         return intent;
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,12 +61,8 @@ public class SandwichPagerActivity extends AppCompatActivity {
             public Fragment getItem(int position) {
                 Sandwich sandwich = JsonUtils.parseSandwichJson(sandwiches[position]);
                 if (sandwich == null) {
-                    // Sandwich data unavailable
-                    // TODO: 4/28/18 Handle this better with startActivityForResult() from Main
-                    closeOnError();
-                    return null;
+                    throw new IllegalArgumentException("Did not receive sandwich object from parser");
                 }
-
                 return SandwichFragment.newInstance(sandwich);
             }
 
