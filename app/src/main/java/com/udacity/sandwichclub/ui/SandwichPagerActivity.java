@@ -65,6 +65,7 @@ public class SandwichPagerActivity extends AppCompatActivity {
                     closeOnError();
                     return null;
                 }
+
                 return SandwichFragment.newInstance(sandwich);
             }
 
@@ -75,6 +76,26 @@ public class SandwichPagerActivity extends AppCompatActivity {
         });
 
         viewPager.setCurrentItem(position);
+        setTitle(JsonUtils.parseSandwichJson(sandwiches[position]).getMainName());
+
+        // Set title on page change
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                /* Do nothing */
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Sandwich currentSandwich = JsonUtils.parseSandwichJson(sandwiches[position]);
+                setTitle(currentSandwich.getMainName());
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                /* Do nothing */
+            }
+        });
     }
 
     private void closeOnError() {
