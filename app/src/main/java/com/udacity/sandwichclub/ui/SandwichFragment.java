@@ -5,15 +5,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.udacity.sandwichclub.R;
 import com.udacity.sandwichclub.model.Sandwich;
 
@@ -30,8 +30,6 @@ public class SandwichFragment extends Fragment {
     /* Class variables */
     @BindView(R.id.sandwich_image_view)
     ImageView sandwichImageView;
-    @BindView(R.id.progressBar)
-    ProgressBar imageLoadBar;
     @BindView(R.id.name_text_view)
     TextView nameTextView;
     @BindView(R.id.aka_text_view)
@@ -56,7 +54,13 @@ public class SandwichFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sandwich = getArguments().getParcelable(ARG_SANDWICH);
+
+        if (getArguments() != null) {
+            sandwich = getArguments().getParcelable(ARG_SANDWICH);
+        } else {
+            //noinspection ConstantConditions
+            Log.d(TAG, "Sandwich not received from " + getActivity().getLocalClassName());
+        }
     }
 
     @Nullable
@@ -66,7 +70,17 @@ public class SandwichFragment extends Fragment {
         ButterKnife.bind(this, view);
 
         populateUI();
-        Picasso.with(getActivity())
+        RequestOptions options = new RequestOptions()
+                .centerCrop()
+                .error(R.drawable.ic_error);
+
+        //noinspection ConstantConditions
+        Glide.with(getActivity())
+                .setDefaultRequestOptions(options)
+                .load(sandwich.getImage())
+                .into(sandwichImageView);
+
+        /*Picasso.with(getActivity())
                 .load(sandwich.getImage())
                 .error(R.drawable.ic_error)
                 .fit()
@@ -81,7 +95,7 @@ public class SandwichFragment extends Fragment {
                     public void onError() {
                         imageLoadBar.setVisibility(View.GONE);
                     }
-                });
+                });*/
 
         return view;
     }
