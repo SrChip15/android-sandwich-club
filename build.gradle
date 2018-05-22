@@ -36,4 +36,5 @@ ext {
     constraintLayout = "1.1.0"
     butterKnife = "8.8.1"
     okHttp = "3.10.0"
+    glideVersion = '4.7.1'
 }
