@@ -21,6 +21,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "com.android.support.constraint:constraint-layout:${rootProject.ext.constraintLayout}"
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
+
+    // Third-party dependencies
     implementation "com.squareup.picasso:picasso:${rootProject.ext.picasso}"
     implementation "com.jakewharton:butterknife:${rootProject.ext.butterKnife}"
     implementation "com.squareup.okhttp3:okhttp:${rootProject.ext.okHttp}"

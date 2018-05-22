@@ -2,7 +2,11 @@ package com.udacity.sandwichclub.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
+import com.udacity.sandwichclub.utils.JsonUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sandwich implements Parcelable {
@@ -125,5 +129,14 @@ public class Sandwich implements Parcelable {
                 this.image + ",\n" +
                 this.ingredients.size() + " ingredients" + ",\n" +
                 "---------------------------";
+    }
+
+    public static List<Sandwich> fromJson(@NonNull String[] data) {
+        List<Sandwich> sandwiches = new ArrayList<>();
+        for (String sandwich : data) {
+            sandwiches.add(JsonUtils.parseSandwichJson(sandwich));
+        }
+
+        return sandwiches;
     }
 }

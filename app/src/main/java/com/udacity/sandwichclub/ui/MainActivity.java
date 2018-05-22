@@ -5,21 +5,20 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.udacity.sandwichclub.R;
+import com.udacity.sandwichclub.model.Sandwich;
+import com.udacity.sandwichclub.ui.adapter.SandwichAdapter;
 
 public class MainActivity extends AppCompatActivity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] sandwiches = getResources().getStringArray(R.array.sandwich_names);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_1, sandwiches);
+        String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
+        SandwichAdapter adapter = new SandwichAdapter(this, Sandwich.fromJson(sandwiches));
 
         // Simplification: Using a ListView instead of a RecyclerView
         ListView listView = findViewById(R.id.sandwiches_listview);
