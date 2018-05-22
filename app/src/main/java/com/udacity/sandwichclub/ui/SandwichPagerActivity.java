@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.udacity.sandwichclub.R;
@@ -22,6 +23,7 @@ public class SandwichPagerActivity extends AppCompatActivity {
     /* Class Constants */
     private static final String EXTRA_POSITION = "indexPosition";
     private static final int DEFAULT_POSITION = -1;
+    private static final String TAG = SandwichPagerActivity.class.getSimpleName();
 
     /* Class variables */
     @BindView(R.id.sandwich_pager)
@@ -73,7 +75,8 @@ public class SandwichPagerActivity extends AppCompatActivity {
         });
 
         viewPager.setCurrentItem(position);
-        setTitle(JsonUtils.parseSandwichJson(sandwiches[position]).getMainName());
+        Sandwich sandwich = JsonUtils.parseSandwichJson(sandwiches[position]);
+        setMainNameAsTitle(position, sandwich);
 
         // Set title on page change
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -85,7 +88,7 @@ public class SandwichPagerActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 Sandwich currentSandwich = JsonUtils.parseSandwichJson(sandwiches[position]);
-                setTitle(currentSandwich.getMainName());
+                setMainNameAsTitle(position, currentSandwich);
             }
 
             @Override
@@ -95,8 +98,20 @@ public class SandwichPagerActivity extends AppCompatActivity {
         });
     }
 
+    private void setMainNameAsTitle(int position, Sandwich sandwich) {
+        if (sandwich != null) {
+            setTitle(sandwich.getMainName());
+        } else {
+            Log.e(TAG, "Sandwich at position " + position + " encountered JSON parse error!");
+        }
+    }
+
     private void closeOnError() {
         finish();
-        Toast.makeText(this, R.string.detail_error_message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(
+                this,
+                R.string.detail_error_message,
+                Toast.LENGTH_SHORT
+        ).show();
     }
 }
