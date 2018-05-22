@@ -80,23 +80,6 @@ public class SandwichFragment extends Fragment {
                 .load(sandwich.getImage())
                 .into(sandwichImageView);
 
-        /*Picasso.with(getActivity())
-                .load(sandwich.getImage())
-                .error(R.drawable.ic_error)
-                .fit()
-                .centerCrop()
-                .into(sandwichImageView, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        imageLoadBar.setVisibility(View.GONE);
-                    }
-
-                    @Override
-                    public void onError() {
-                        imageLoadBar.setVisibility(View.GONE);
-                    }
-                });*/
-
         return view;
     }
 
