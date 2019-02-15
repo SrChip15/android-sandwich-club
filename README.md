@@ -25,5 +25,5 @@ Your project will be evaluated by a Udacity Code Reviewer according to [this rub
 Each Android ND project will be reviewed against the [Common Project Requirements](http://udacity.github.io/android-nanodegree-guidelines/core.html), in addition to its project-specific rubric.
 
 ## Screenshots
-![List View](https://github.com/SrChip15/android-sandwich-club/blob/master/docs/list_view.png)
-![Detail View](https://github.com/SrChip15/android-sandwich-club/blob/master/docs/detail_view.png)
+<img src="https://github.com/SrChip15/android-sandwich-club/blob/master/docs/list_view.png" width="300" />
+<img src="https://github.com/SrChip15/android-sandwich-club/blob/master/docs/detail_view.png" width="300" />
