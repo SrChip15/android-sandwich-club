@@ -7,6 +7,7 @@ plugins {
 
 android {
     compileSdkVersion 33
+
     defaultConfig {
         applicationId "com.udacity.sandwichclub"
         minSdkVersion 19
@@ -37,8 +38,10 @@ android {
 }
 
 dependencies {
+    implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation "androidx.constraintlayout:constraintlayout:$constraintlayout_version"
     implementation "androidx.appcompat:appcompat:$appcompat_version"
+    implementation "com.google.android.material:material:$material_version"
 
     // Third-party dependencies
     implementation "com.squareup.okhttp3:okhttp:$okHttp"

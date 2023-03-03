@@ -1,49 +1,54 @@
 package com.udacity.sandwichclub.ui.adapter
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.udacity.sandwichclub.R
 import com.udacity.sandwichclub.model.Sandwich
 
-class SandwichAdapter(private val context: Context, private val sandwiches: ArrayList<Sandwich>) :
-    ArrayAdapter<Sandwich>(context, 0, sandwiches) {
+class SandwichAdapter(private val sandwiches: List<Sandwich>) :
+    RecyclerView.Adapter<SandwichAdapter.SandwichHolder>() {
+
     companion object {
         val TAG = SandwichAdapter::class.simpleName
     }
 
-    override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_view, parent, false)
+    class SandwichHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val image: ImageView = itemView.findViewById(R.id.sandwich_quick_info_iv)
+        val name: TextView = itemView.findViewById(R.id.sandwich_quick_info_tv)
+    }
 
-        val name: TextView = view.findViewById(R.id.sandwich_quick_info_tv)
-        val image: ImageView = view.findViewById(R.id.sandwich_quick_info_iv);
 
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SandwichHolder {
+        val itemView =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item_view, parent, false)
+        return SandwichHolder(itemView)
+    }
+
+    override fun getItemCount(): Int {
+        return sandwiches.size
+    }
+
+    override fun onBindViewHolder(holder: SandwichHolder, position: Int) {
         val sandwich = sandwiches[position]
-        if (sandwich != null) {
-            name.text = sandwich.mainName
+        holder.name.text = sandwich.mainName
 
-            //todo: Affix circular image of sandwich
-            val options = RequestOptions()
-                    .error(R.drawable.ic_error)
-                    .fitCenter()
-                    .circleCrop()
+        val options = RequestOptions().error(R.drawable.ic_error).fitCenter().circleCrop()
 
-            Glide.with(context)
-                    .setDefaultRequestOptions(options)
-                    .load(sandwich.image)
-                    .into(image)
+        Glide.with(holder.image.context)
+            .setDefaultRequestOptions(options)
+            .load(sandwich.image)
+            .into(holder.image)
 
-        } else {
-            Log.e(TAG, "Sandwich at position $position parsed as null")
+        holder.itemView.setOnClickListener {
+            @Suppress("UNUSED_VARIABLE") val context = holder.image.context
+            Log.i(TAG, "onBindViewHolder: Fragment navigation unimplemented!")
         }
-
-        return view
     }
 }
