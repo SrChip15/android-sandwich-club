@@ -1,16 +1,16 @@
-package com.udacity.sandwichclub.ui;
+package com.udacity.sandwichclub.ui
 
-import android.os.Bundle;
+import android.os.Bundle
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 
-import com.udacity.sandwichclub.R;
+import com.udacity.sandwichclub.R
 
-public class MainActivity extends AppCompatActivity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+class MainActivity : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
         // String[] sandwiches = getResources().getStringArray(R.array.sandwich_details);
         // SandwichAdapter adapter = new SandwichAdapter(this, Sandwich.fromJson(sandwiches));
@@ -26,8 +26,8 @@ public class MainActivity extends AppCompatActivity {
         // });
     }
 
-    // private void launchDetailActivity(int position) {
-    //     Intent intent = SandwichPagerActivity.newIntent(this, position);
+    // private fun launchDetailActivity(position: Int) {
+    //     val intent: Intent = SandwichPagerActivity.newIntent(this, position);
     //     startActivity(intent);
     // }
 }
