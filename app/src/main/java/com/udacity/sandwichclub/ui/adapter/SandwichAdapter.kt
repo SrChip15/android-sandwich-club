@@ -6,18 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.udacity.sandwichclub.R
 import com.udacity.sandwichclub.model.Sandwich
+import com.udacity.sandwichclub.ui.SandwichListFragmentDirections
 
 class SandwichAdapter(private val sandwiches: List<Sandwich>) :
     RecyclerView.Adapter<SandwichAdapter.SandwichHolder>() {
 
-    companion object {
-        val TAG = SandwichAdapter::class.simpleName
-    }
+    // companion object {
+    //     val TAG = SandwichAdapter::class.simpleName
+    // }
 
     class SandwichHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val image: ImageView = itemView.findViewById(R.id.sandwich_quick_info_iv)
@@ -47,8 +49,8 @@ class SandwichAdapter(private val sandwiches: List<Sandwich>) :
             .into(holder.image)
 
         holder.itemView.setOnClickListener {
-            @Suppress("UNUSED_VARIABLE") val context = holder.image.context
-            Log.i(TAG, "onBindViewHolder: Fragment navigation unimplemented!")
+            val action = SandwichListFragmentDirections.actionSandwichListFragmentToSandwichFragment(sandwich = sandwich)
+            holder.itemView.findNavController().navigate(action)
         }
     }
 }

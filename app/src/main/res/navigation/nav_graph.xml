@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/sandwichListFragment">
+
+    <fragment
+        android:id="@+id/sandwichListFragment"
+        android:name="com.udacity.sandwichclub.ui.SandwichListFragment"
+        android:label="SandwichListFragment" >
+        <action
+            android:id="@+id/action_sandwichListFragment_to_sandwichFragment"
+            app:destination="@id/sandwichFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sandwichFragment"
+        android:name="com.udacity.sandwichclub.ui.SandwichFragment"
+        android:label="SandwichFragment" >
+        <argument
+            android:name="sandwich"
+            app:argType="com.udacity.sandwichclub.model.Sandwich" />
+    </fragment>
+</navigation>

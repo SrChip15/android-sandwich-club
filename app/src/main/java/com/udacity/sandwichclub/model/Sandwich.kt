@@ -1,10 +1,12 @@
 package com.udacity.sandwichclub.model
 
 import android.os.Parcelable
+import androidx.annotation.Keep
 import com.udacity.sandwichclub.utils.JsonUtils
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
+@Keep
 data class Sandwich(
     val mainName: String,
     val alsoKnownAs: List<String>,
