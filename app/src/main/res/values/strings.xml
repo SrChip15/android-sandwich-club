@@ -15,6 +15,7 @@
     <string name="detail_error_message">Sandwich data not available</string>
     <string name="detail_image_error_message">Image unavailable!</string>
     <string name="detail_unavailable_error_message">Information Unavailable</string>
+    <string name="sandwich_image">Sandwich image</string>
 
     <string-array name="sandwich_names">
         <item>Ham and cheese sandwich</item>
@@ -130,5 +131,7 @@
             mashed potato patty\",\"chilli peppers\",\"garlic\",\"ginger\",\"bread bun\"]}
         </item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
