@@ -49,7 +49,11 @@ class SandwichAdapter(private val sandwiches: List<Sandwich>) :
             .into(holder.image)
 
         holder.itemView.setOnClickListener {
-            val action = SandwichListFragmentDirections.actionSandwichListFragmentToSandwichFragment(sandwich = sandwich)
+            val action =
+                SandwichListFragmentDirections.actionSandwichListFragmentToSandwichFragment(
+                    sandwich = sandwich,
+                    fragmentLabel = sandwich.mainName
+                )
             holder.itemView.findNavController().navigate(action)
         }
     }

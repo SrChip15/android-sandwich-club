@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/sandwichListFragment"
         android:name="com.udacity.sandwichclub.ui.SandwichListFragment"
-        android:label="SandwichListFragment" >
+        android:label="@string/app_name">
         <action
             android:id="@+id/action_sandwichListFragment_to_sandwichFragment"
             app:destination="@id/sandwichFragment" />
@@ -15,9 +15,12 @@
     <fragment
         android:id="@+id/sandwichFragment"
         android:name="com.udacity.sandwichclub.ui.SandwichFragment"
-        android:label="SandwichFragment" >
+        android:label="{fragmentLabel}">
         <argument
             android:name="sandwich"
             app:argType="com.udacity.sandwichclub.model.Sandwich" />
+        <argument
+            android:name="fragmentLabel"
+            app:argType="string" />
     </fragment>
 </navigation>
